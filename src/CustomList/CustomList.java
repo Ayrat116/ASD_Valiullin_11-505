@@ -38,27 +38,28 @@ public class CustomList {
     public void addIndex(int index, int info){
         Node node = new Node(info);
         Node pointer = head;
-        int a = 1;
+        int currentIndex = 0;
         Node next;
 
-        if (index > size()+1){
+        if (index < 0){
             System.out.println("Добавление на позицию " + "<" + index + ">" + " невозможно");
             return;
         }
-        if (head == null){
-            pointer = new Node(info);
-            return;
-        }
 
-        if (index == 1){
+        if (index == 0){
             node.nextNode = pointer;
             head = node;
             return;
         }
 
-        while (a < index-1){
-            a++;
+        if (head == null){
+            System.out.println("Добавление на позицию " + "<" + index + ">" + " невозможно. (Список пуст)");
+            return;
+        }
+
+        while (pointer != null && currentIndex < index-1){
             pointer = pointer.nextNode;
+            currentIndex++;
         }
 
         next = pointer.nextNode;
@@ -79,7 +80,7 @@ public class CustomList {
             return;
         }
 
-        if (size() == 1){
+        if (head.nextNode == null){
             System.out.println("Список состоит из 1 значения - " + pointer.info);
             return;
         }
@@ -128,10 +129,11 @@ public class CustomList {
             System.out.println("Список пуст, удаление невозможно");
             return;
         }
-        if (size() == 1){
+        if (head.nextNode == null){
             head = null;
             return;
         }
+
         while (pointer.nextNode.nextNode != null){
             pointer = pointer.nextNode;
         }
@@ -160,45 +162,55 @@ public class CustomList {
 
     public void deleteIndex(int index){
         Node pointer = head;
-        int a = 1;
+        int currentIndex = 0;
         Node next;
 
         if (head == null){
             System.out.println("Список пуст");
         }
 
-        if (size() < index){
+        if (index < 0){
             System.out.println("Удаление элемента под индексом " + "<" + index + ">" + " невозможно");
             return;
         }
 
-        if (size() == 1){
-            deleteLast();
+        if (index == 0){
+            head = pointer.nextNode;
             return;
         }
 
-        if (index == 1){
-            head = pointer.nextNode;
+        if (head.nextNode == null){
+            System.out.println("Удаление элемента под индексом " + "<" + index + ">" + " невозможно");
+            return;
         }
-        while (a < index-1){
-            a++;
+
+
+        while (currentIndex < index-1 && pointer != null){
+            currentIndex++;
             pointer = pointer.nextNode;
         }
 
-        pointer.nextNode = pointer.nextNode.nextNode;
+        if (currentIndex == index-1){
+            pointer.nextNode = pointer.nextNode.nextNode;
+            return;
+        } else {
+            System.out.println("Удаление элемента под индексом " + "<" + index + ">" + " невозможно");
+            return;
+        }
     }
 
     public void deleteAfterIndex(int index){
-        int a = 1;
         Node pointer = head;
+        int currentIndex = 0;
 
-        if (index == 0){
+        if (index < 0){
             System.out.println("Удаление элемента под индексом <" + index + "> невозможно");
             return;
         }
 
-        if (index > size()){
-            System.out.println("Нет элемента под индексом <" + index + ">. Удаление невозможно");
+        if (index == 0){
+            head = null;
+            return;
         }
 
         if (head == null){
@@ -206,17 +218,18 @@ public class CustomList {
             return;
         }
 
-        if (index == 1){
-            head = null;
+        while (pointer != null && currentIndex < index){
+            pointer = pointer.nextNode;
+            currentIndex++;
+        }
+
+        if (currentIndex == index){
+            pointer.nextNode = null;
+            return;
+        } else {
+            System.out.println("Удаление элемента под индексом <" + index + "> невозможно");
             return;
         }
-
-        while (a < index-1){
-            a++;
-            pointer = pointer.nextNode;
-        }
-
-        pointer.nextNode = null;
     }
 
     public CustomList reverse(){
@@ -256,7 +269,7 @@ public class CustomList {
     public void indexElement(int element){
         Node pointer = head;
         CustomList customList = new CustomList();
-        int index = 1;
+        int index = 0;
 
         while (pointer != null){
             if (pointer.info == element){
@@ -279,12 +292,17 @@ public class CustomList {
             return;
         }
 
+        if (head.nextNode == null){
+            System.out.println("Удаление второго элемента невозможно. (Список состоит из одного элемента)");
+            return;
+        }
         pointer.nextNode = pointer.nextNode.nextNode;
     }
 
     public void deleteElement(int element){
         Node pointer = head;
         Node next;
+        int a = 0;
 
         if (head == null){
             System.out.println("Список пуст. Удаление невозможно");
@@ -307,10 +325,14 @@ public class CustomList {
 
             if (pointer.nextNode.info == element){
                 pointer.nextNode = pointer.nextNode.nextNode;
+                a++;
             } else {
                 pointer = pointer.nextNode;
             }
         }
 
+        if (a==0){
+            System.out.println("Удаление элемента <" + element + "> невозможно. (Элемент не найден)");
+        }
     }
 }
