@@ -1,0 +1,1 @@
+# ASD_Valiullin_11-505
