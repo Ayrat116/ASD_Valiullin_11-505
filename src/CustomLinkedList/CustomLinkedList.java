@@ -166,7 +166,6 @@ public class CustomLinkedList {
         LinkedNode pointer = head;
 
         while (pointer != null) {
-            LinkedNode nextNode = pointer.nextNode;
 
             if (pointer.info == info) {
                 if (pointer == head) {
@@ -183,7 +182,7 @@ public class CustomLinkedList {
                 pointer.prevNode.nextNode = pointer.nextNode;
                 pointer.nextNode.prevNode = pointer.prevNode;
             }
-            pointer = nextNode;
+            pointer = pointer.nextNode;
         }
     }
 
@@ -222,5 +221,16 @@ public class CustomLinkedList {
             pointer = pointer.nextNode;
         }
         return list;
+    }
+
+    public void addRange(int[] arr){
+        LinkedNode pointer = head;
+        if (arr.length == 0){
+            return;
+        }
+
+        for (int i = 0; i < arr.length; i++){
+            addLast(arr[i]);
+        }
     }
 }

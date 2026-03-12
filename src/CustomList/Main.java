@@ -6,7 +6,6 @@ public class Main {
         CustomList customList = new CustomList(arr);
         //customList.addLast(18);
         //System.out.println(customList.size());
-        //customList.addRange();
         //customList.deleteLast();
         //customList.addIndex(3,78);
         //customList.deleteIndex(5);
@@ -17,6 +16,7 @@ public class Main {
         //customList.indexElement(2);
         //customList.deleteSecond();
         //customList.deleteElement(8);
+        customList.addRange(arr);
         customList.print();
     }
 }

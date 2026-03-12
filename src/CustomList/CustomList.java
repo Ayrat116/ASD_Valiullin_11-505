@@ -69,39 +69,16 @@ public class CustomList {
 
     }
 
-    public void addRange(){
-        int min = 0;
-        int max = 0;
-
+    public void addRange(int[] arr){
         Node pointer = head;
 
-        if (head == null){
-            System.out.println("Список пуст");
+        if (arr.length == 0){
             return;
         }
 
-        if (head.nextNode == null){
-            System.out.println("Список состоит из 1 значения - " + pointer.info);
-            return;
+        for (int i = 0; i < arr.length; i++){
+            addLast(arr[i]);
         }
-
-        min = pointer.info;
-
-        while (pointer != null){
-
-            if (pointer.info < min){
-                min = pointer.info;
-            }
-
-            if (pointer.info > max){
-                max = pointer.info;
-            }
-
-            pointer = pointer.nextNode;
-        }
-
-        System.out.println("Минимальное значение списка - " + min);
-        System.out.println("Максимальное значение списка - " + max);
     }
 
     public int size(){

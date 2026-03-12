@@ -7,9 +7,10 @@ public class Main {
         CustomLinkedList customLinkedList = new CustomLinkedList(arr);
         //customLinkedList.addToIndex(3,1);
         //customLinkedList.deleteAfterIndex(6);
-        //customLinkedList.deleteElement(7);
+        //customLinkedList.deleteElement(2);
         //customLinkedList.deleteSecond();
-        customLinkedList.reverse().print();
+        //customLinkedList.reverse().print();
+        customLinkedList.addRange(arr);
         customLinkedList.print();
     }
 }
